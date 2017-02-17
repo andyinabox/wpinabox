@@ -26,7 +26,7 @@ Then you can run:
 composer install
 
 # install npm dependencies
-cd wp-content/themes/[project name]-theme && yarn install
+cd wp-content/themes/[theme name] && yarn install
 ```
 
 Dependencies
