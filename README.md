@@ -3,6 +3,32 @@ Starter Wordpress Project
 
 Developed by Andy Dayton.
 
+Setup
+------
+
+To install ACF Pro with composer you need to set the env variable `ACF_PRO_KEY` with your api key:
+
+```bash
+export ACF_PRO_KEY=[ your acf key ] 
+```
+
+You'll need to do some renaming:
+
+* Find and replace files for `wpinabox` and `WPinabox`
+* Rename the theme to fit your project
+* Change project name in `composer.json` in the project root and `package.json` in the theme.
+* _I'm sure there's something I'm forgetting..._
+
+Then you can run:
+
+```bash
+# install php dependencies
+composer install
+
+# install npm dependencies
+cd wp-content/themes/[project name]-theme && yarn install
+```
+
 Dependencies
 ------------
 

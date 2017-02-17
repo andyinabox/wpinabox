@@ -1,6 +1,6 @@
 <?php
 
-namespace wpinabox;
+namespace WPinabox;
 
 class Page extends TimberPost {
 
