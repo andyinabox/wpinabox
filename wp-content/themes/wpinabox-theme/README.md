@@ -40,12 +40,8 @@ Dependencies
 
 ### Scripts
 
- * [Macy.js](https://github.com/bigbitecreative/macy.js) for masonry layout
- * [Swiper](https://github.com/nolimits4web/swiper/) for slideshow
- * [Layzr.js](https://github.com/callmecavs/layzr.js) for lazy-loading images
- * [jump.js](http://callmecavs.com/jump.js/) for anchor navigation
+ * _None yet_
 
 ### Styles
 
  * [CSS Reset & Normalize SASS](https://www.npmjs.com/package/css-reset-and-normalize-sass)
- * [Breakpoint SASS](https://github.com/at-import/breakpoint) for setting up breakpoints
