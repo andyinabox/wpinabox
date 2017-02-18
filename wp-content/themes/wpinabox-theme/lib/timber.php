@@ -21,9 +21,13 @@ class Site extends TimberSite {
 	var $pkg;
 
 	function __construct() {
-		$this->ns = 'asb';
+		// load the package.json file
 		$this->pkg = $pkg = json_decode(file_get_contents(get_template_directory() . '/package.json'));
 
+		// by default, set the namespace from package.json
+		$this->ns = $pkg['name'];
+
+		// setup
 		add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'menus' );
 		add_filter( 'timber_context', array( $this, 'add_to_context' ) );
@@ -31,7 +35,7 @@ class Site extends TimberSite {
 		add_action( 'init', array( $this, 'register_scripts_and_styles' ) );
 		add_action( 'init', array( $this, 'register_post_types' ) );
 
-
+		// register image sizes
 		$this->register_image_sizes();
 
 		parent::__construct();
@@ -64,11 +68,10 @@ class Site extends TimberSite {
 
 	function register_image_sizes() {
 		// set up image sizes
-
 	}
 
 	function add_to_context( $context ) {
-		//
+		// set up context
 		return $context;
 	}
 	function add_to_twig( $twig ) {
