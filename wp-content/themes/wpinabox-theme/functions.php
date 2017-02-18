@@ -6,7 +6,6 @@
 $function_includes = [
   'lib/acf.php',
   'lib/timber.php',
-  'lib/utilities.php',
   'lib/admin.php',
   'lib/post-types/page.php'
 ];
