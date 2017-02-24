@@ -1,73 +1,21 @@
 // vendor libraries
 @import "../../../node_modules/css-reset-and-normalize-sass/scss/flavored-reset-and-normalize.scss";
-@import "../../../node_modules/breakpoint-sass/stylesheets/_breakpoint.scss";
-@import "../../../node_modules/swiper/dist/css/swiper";
 
-// import fonts
-@import "typography";
+/**
+ * variables
+ */
 
+// @wp-my-var: 500px
 
-//
-// typography variables
-//
-$asb-primary-typeface: 'StempelGaramondW01';
-$asb-secondary-typeface: 'Futura LT W01';
-
-// this will probably need some tweaking
-// https://zellwk.com/blog/viewport-based-typography/
-$asb-base-font-size: calc(100% + 0.25vw);
-$asb-base-font-size-mobile: 130%;
-
-$asb-base-line-height: 1.25em;
-
-$asb-font-size-large: 1.125rem;
-$asb-line-height-large: 1.4rem;
-
-$asb-font-size-medium: 1rem;
-$asb-line-height-medium: 1.25rem;
-
-$asb-font-size-small: 0.75rem;
-$asb-line-height-small: 0.9rem;
-
-
-//
-// colors
-//
-$asb-black: rgb(0, 0, 0);
-$asb-white: rgb(255, 255, 255);
-$asb-off-white: rgb(255, 240, 235);
-$asb-red: rgb(250, 100, 85);
-$asb-blue: rgb(15, 110, 215);
-$asb-yellow: rgb(255, 240, 55);
-$asb-grey: rgb(200, 200, 200);
-
-
-
-
-//
-// grid
-//
-$asb-grid-column: 18vw;
-$asb-grid-gutter: 4vw;
-$asb-grid-margin: $asb-grid-gutter / 2;
-
-//
-// general layout
-//
-$asb-header-height: $asb-grid-gutter;
-$asb-layout-max-width: 1600px;
-
-//
-// breakpoints
-// 
-$asb-bp-xs: max-width 640px;
-$asb-bp-sm: max-width 800px;
-$asb-bp-md: 801px $asb-layout-max-width - 1;
-$asb-bp-lg: min-width $asb-layout-max-width;
-
+// sass mixins
 @import "mixins";
+
+// base element styles
 @import "base";
-@import "forms";
+
+// general layout, containers, etc
 @import "layout";
+
+// css modules
 @import "modules";
 

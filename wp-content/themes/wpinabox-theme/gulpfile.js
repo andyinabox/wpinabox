@@ -1,6 +1,5 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass');
-const svgo = require('gulp-svgo');
 const sourcemaps = require('gulp-sourcemaps');
 const notify = require('gulp-notify');
 const plumber = require('gulp-plumber');
@@ -26,18 +25,8 @@ const plumb = {
 
 
 gulp.task('img', function() {
-
-	// svgo options
-	const svgOpts = {	
-		plugins: [
-			{ removeDoctype: true },
-			{ removeXMLProcInst: true }
-		]
-	}
-
 	return gulp.src(src+'img/**')
 		.pipe(plumber(plumb))
-		.pipe(svgo(svgOpts))
 		.pipe(gulp.dest(dest+'img/'))
 		.pipe(browserSync.stream())
 });
