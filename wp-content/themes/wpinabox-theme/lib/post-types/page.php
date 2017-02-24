@@ -1,6 +1,6 @@
 <?php
 /*
-namespace WPInabox;
+namespace WPB;
 
 use Timber\Post as TimberPost;
 

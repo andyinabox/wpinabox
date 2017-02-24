@@ -15,7 +15,7 @@
 
 $context = Timber::get_context();
 
-$context['post'] = new WPinabox\Page();
+$context['post'] = new WPB\Page();
 
 $templates = array( 'index.twig' );
 

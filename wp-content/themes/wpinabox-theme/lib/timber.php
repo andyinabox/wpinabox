@@ -1,5 +1,5 @@
 <?php
-namespace WPinabox;
+namespace WPB;
 
 if ( ! class_exists( 'Timber' ) ) {
 	add_action( 'admin_notices', function() {
