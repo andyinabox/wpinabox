@@ -16,7 +16,7 @@ grep -ilr 'WPinabox' * | xargs -I@ sed -i '' "s/WPinabox/$proj_name/g" @
 grep -ilr 'wpb' * | xargs -I@ sed -i '' "s/wpb/$proj_ns_lower/g" @
 grep -ilr 'WPB' * | xargs -I@ sed -i '' "s/WPB/$proj_ns_upper/g" @
 grep -ilr 'wpinabox' * | xargs -I@ sed -i '' "s/wpinabox/$proj_name_lower/g" @
-mv "themes/wpinabox-theme" "themes/$proj_name_lower-theme"
+mv "themes/wpinabox-theme" "wp-content/themes/$proj_name_lower-theme"
 
 cd -
 
