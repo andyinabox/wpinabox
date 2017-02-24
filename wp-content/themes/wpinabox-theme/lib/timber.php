@@ -1,5 +1,4 @@
 <?php
-
 namespace WPinabox;
 
 if ( ! class_exists( 'Timber' ) ) {
@@ -14,6 +13,9 @@ if ( ! class_exists( 'Timber' ) ) {
 	return;
 }
 
+use Timber;
+use Timber\Site as TimberSite;
+
 Timber::$dirname = array('tpl', 'views');
 
 class Site extends TimberSite {
@@ -22,10 +24,10 @@ class Site extends TimberSite {
 
 	function __construct() {
 		// load the package.json file
-		$this->pkg = $pkg = json_decode(file_get_contents(get_template_directory() . '/package.json'));
+		$this->pkg = json_decode(file_get_contents(get_template_directory() . '/package.json'));
 
 		// by default, set the namespace from package.json
-		$this->ns = $pkg['name'];
+		$this->ns = $this->pkg->name;
 
 		// setup
 		add_theme_support( 'post-thumbnails' );

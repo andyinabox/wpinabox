@@ -1,9 +1,6 @@
 <?php
 
-namespace WPinabox;
-
-
-class CustomPost extends TimberPost {
+class WPinabox\CustomPost extends TimberPost {
 
 	static function register() {
 

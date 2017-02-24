@@ -12,9 +12,10 @@
  * @subpackage  Timber
  * @since   Timber 0.1
  */
+
 $context = Timber::get_context();
 
-$context['post'] = new AsbPage();
+$context['post'] = new WPinabox\Page();
 
 $templates = array( 'index.twig' );
 
