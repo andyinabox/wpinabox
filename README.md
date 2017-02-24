@@ -14,7 +14,7 @@ export ACF_PRO_KEY=[ your acf key ]
 
 You'll need to do some renaming:
 
-* Find and replace files for `wpinabox` and `WPinabox`
+* Find and replace files for `wpinabox`, `WPinabox`, and `wpb`.
 * Rename the theme to fit your project
 * Change project name in `composer.json` in the project root and `package.json` in the theme.
 * _I'm sure there's something I'm forgetting..._
