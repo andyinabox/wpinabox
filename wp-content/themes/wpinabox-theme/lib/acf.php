@@ -7,7 +7,7 @@ if( function_exists('acf_add_options_page') ) {
 } 
 
 
-function asb_save_acf_json( $path ) {
+function wpb_save_acf_json( $path ) {
     // update path
     $path = get_stylesheet_directory() . '/lib/acf/';
     // return
@@ -15,7 +15,7 @@ function asb_save_acf_json( $path ) {
 }
 
 
-function asb_acf_json_load_point( $paths ) {
+function wpb_acf_json_load_point( $paths ) {
     // remove original path (optional)
     unset($paths[0]);
     // append path

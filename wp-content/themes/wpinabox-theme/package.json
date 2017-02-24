@@ -1,7 +1,7 @@
 {
-  "name": "wpinabox Theme",
+  "name": "wpinabox",
   "version": "0.0.1",
-  "description": "WP Site Starter",
+  "description": "",
   "main": "index.php",
   "scripts": {
     "build": "gulp",

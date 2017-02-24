@@ -6,18 +6,20 @@ Developed by Andy Dayton.
 Setup
 ------
 
-To install ACF Pro with composer you need to set the env variable `ACF_PRO_KEY` with your api key:
+To install ACF Pro with composer you need to create a `.env` file and include your ACF Pro license key:
 
 ```bash
-export ACF_PRO_KEY=[ your acf key ] 
+ACF_PRO_KEY=[ your acf key ] 
 ```
 
-You'll need to do some renaming:
+Then you'll need to do some renaming:
 
-* Find and replace files for `wpinabox`, `WPinabox`, and `wpb`.
-* Rename the theme to fit your project
-* Change project name in `composer.json` in the project root and `package.json` in the theme.
-* _I'm sure there's something I'm forgetting..._
+1. Find and replace within project files (examples below):
+  * `WPinabox` &rarr; `My Awesome Site`
+  * `WPB` &rarr; `MAS`
+  * `wpb` &rarr; `mas`
+  * `wpinabox` &rarr; `my-awesome-site`
+2. Rename `wpinabox-theme` to something that makes sense.
 
 Then you can run:
 

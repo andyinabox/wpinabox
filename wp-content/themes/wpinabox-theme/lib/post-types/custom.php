@@ -1,5 +1,5 @@
 <?php
-
+/*
 class WPinabox\CustomPost extends TimberPost {
 
 	static function register() {
@@ -42,6 +42,6 @@ class WPinabox\CustomPost extends TimberPost {
 	}
 
 }
-
+*/
 
 ?>
