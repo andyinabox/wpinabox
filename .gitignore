@@ -5,6 +5,7 @@
 *.bak
 *.swp
 Thumbs.db
+.env
 
 # wordpress specific
 wp-config.php
