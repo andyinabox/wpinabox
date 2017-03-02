@@ -15,6 +15,8 @@ const autoprefixer = require('autoprefixer');
 
 const browserSync = require('browser-sync').create();
 
+const pkg = require('./package.json');
+
 const src = 'assets/src/';
 const dest = 'assets/dist/'
 
@@ -90,7 +92,7 @@ gulp.task('fonts', function() {
 gulp.task('watch', function () {
   browserSync.init({
     files: ['lib/**/*.php', '*.php', 'tpl/**/*.twig'],
-    proxy: 'http://assembledbrands.dev',
+    proxy: pkg.browserSync.proxy,
     snippetOptions: {
       whitelist: ['/wp-admin/admin-ajax.php'],
       blacklist: ['/wp-admin/**']
