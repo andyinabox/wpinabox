@@ -5,6 +5,7 @@ if [ "$(whoami)" != "vagrant" ]; then
    exit 1
 fi
 
+
 read -p "Enter a replace value for project name (My Project Name): " proj_name
 read -p "Enter a lower-case replace value for namespace (mpn): " proj_ns_lower
 read -p "Enter an upper-case replace value for namespace (MPN): " proj_ns_upper
@@ -28,6 +29,7 @@ echo "ACF_PRO_KEY=$acf_pro_key" > .env
 composer install
 
 echo "activating theme and plugins..."
+
 wp plugin activate advanced-custom-fields-pro
 wp plugin activate timber-library
 wp theme activate "$theme_name"
