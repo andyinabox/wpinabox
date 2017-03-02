@@ -1,4 +1,4 @@
-Assembled Brands Theme
+WPinabox Theme
 =======================
 
 Development

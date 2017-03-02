@@ -1,4 +1,4 @@
-Starter Wordpress Project
+WPinabox Project
 ==========================
 
 Developed by Andy Dayton.
