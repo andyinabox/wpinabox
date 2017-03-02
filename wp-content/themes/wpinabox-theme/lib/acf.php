@@ -24,7 +24,7 @@ function wpb_acf_json_load_point( $paths ) {
     return $paths; 
 }
 
-add_filter('acf/settings/save_json', 'asb_save_acf_json');
-add_filter('acf/settings/load_json', 'asb_acf_json_load_point');
+add_filter('acf/settings/save_json', 'wpb_save_acf_json');
+add_filter('acf/settings/load_json', 'wpb_acf_json_load_point');
 
 ?>
