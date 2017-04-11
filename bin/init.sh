@@ -1,5 +1,48 @@
 #!/bin/bash
 
+# This is a general-purpose function to ask Yes/No questions in Bash, either
+# with or without a default answer. It keeps repeating the question until it
+# gets a valid answer.
+# https://gist.github.com/davejamesmiller/1965569
+
+ask() {
+    # http://djm.me/ask
+    local prompt default REPLY
+
+    while true; do
+
+        if [ "${2:-}" = "Y" ]; then
+            prompt="Y/n"
+            default=Y
+        elif [ "${2:-}" = "N" ]; then
+            prompt="y/N"
+            default=N
+        else
+            prompt="y/n"
+            default=
+        fi
+
+        # Ask the question (not using "read -p" as it uses stderr not stdout)
+        echo -n "$1 [$prompt] "
+
+        # Read the answer (use /dev/tty in case stdin is redirected from somewhere else)
+        read REPLY </dev/tty
+
+        # Default?
+        if [ -z "$REPLY" ]; then
+            REPLY=$default
+        fi
+
+        # Check if the reply is valid
+        case "$REPLY" in
+            Y*|y*) return 0 ;;
+            N*|n*) return 1 ;;
+        esac
+
+    done
+}
+
+
 if [ "$(whoami)" != "vagrant" ]; then
    echo "This script must be run as vagrant user. vagrant ssh and try again." 1>&2
    exit 1
@@ -34,5 +77,12 @@ wp plugin activate advanced-custom-fields-pro
 wp plugin activate timber-library
 wp theme activate "$theme_name"
 
-echo "removing git repository..."
-rm -rf .git
+
+if ask "Remove existing git repository?"; then
+  echo "removing git repository..."
+  rm -rf .git
+else 
+  echo "leaving git repository..."
+  git status
+fi
+
