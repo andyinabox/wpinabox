@@ -42,12 +42,10 @@ ask() {
     done
 }
 
-
 if [ "$(whoami)" != "vagrant" ]; then
    echo "This script must be run as vagrant user. vagrant ssh and try again." 1>&2
    exit 1
 fi
-
 
 read -p "Enter a replace value for project name (My Project Name): " proj_name
 read -p "Enter a lower-case replace value for namespace (mpn): " proj_ns_lower
@@ -56,10 +54,15 @@ read -p "Enter file-friendly project name (my-project-name): " proj_name_lower
 read -p "What's your ACF Pro API key? " acf_pro_key
 
 theme_name="$proj_name_lower-theme"
-replace_path="./wp-content/themes/$theme_name"
+plugin_name="$proj_name_lower-plugin"
+replace_path="./wp-content/"
 
 echo "renaming theme to $theme_name"
-mv wp-content/themes/wpinabox-theme "$replace_path"
+mv wp-content/themes/wpinabox-theme "wp-content/themes/$theme_name"
+
+echo "renaming plugin to $plugin_name"
+mv wp-content/plugins/wpinabox-plugin "wp-content/themes/$plugin_name"
+
 
 echo "replacing names..."
 find $replace_path -type f -readable -writable -exec sed -i "s/WPinabox/$proj_name/g" {} \;
@@ -75,6 +78,7 @@ echo "activating theme and plugins..."
 
 wp plugin activate advanced-custom-fields-pro
 wp plugin activate timber-library
+wp plugin activate "$plugin_name"
 wp theme activate "$theme_name"
 
 
