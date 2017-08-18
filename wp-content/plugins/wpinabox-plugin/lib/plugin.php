@@ -1,5 +1,5 @@
 <?php
-namespace Even;
+namespace WPB;
 use Timber;
 
 class Plugin {
@@ -106,7 +106,7 @@ class Plugin {
 		// anything not included here will be tacked
 		// on to the end in default order
 		$custom_order = [
-			'index.php',
+			'index.php'
 			, 'acf-options'
 			, 'separator1'
 			, 'edit.php'

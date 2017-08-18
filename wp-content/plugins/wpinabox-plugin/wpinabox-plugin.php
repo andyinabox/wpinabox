@@ -34,33 +34,13 @@ if(!class_exists('Timber')) {
 }
 
 // taxonomies
-include_once 'lib/taxonomies/author.php';
-
-// content blocks
-include_once 'lib/base-content-block.php';
-include_once 'lib/content-blocks/archive-list.php';
-include_once 'lib/content-blocks/article.php';
-include_once 'lib/content-blocks/custom.php';
-include_once 'lib/content-blocks/features.php';
-include_once 'lib/content-blocks/featured-item.php';
-include_once 'lib/content-blocks/image-viewer.php';
-include_once 'lib/content-blocks/image.php';
-include_once 'lib/content-blocks/lead-story.php';
-include_once 'lib/content-blocks/portfolio-gallery.php';
-include_once 'lib/content-blocks/quote.php';
-include_once 'lib/content-blocks/spacer.php';
-include_once 'lib/content-blocks/strapline.php';
-include_once 'lib/content-blocks/video.php';
-include_once 'lib/content-blocks/aside.php';
-include_once 'lib/content-blocks/button.php';
-include_once 'lib/content-block-collection.php';
+// include_once 'lib/taxonomies/example.php';
 
   // post types
 include_once 'lib/post-types/base-post.php';
 include_once 'lib/post-types/post.php';
 include_once 'lib/post-types/page.php';
-include_once 'lib/post-types/issue.php';
-include_once 'lib/post-types/portfolio.php';
+// include_once 'lib/post-types/example.php';
 
 // misc
 include_once 'lib/menu.php';
@@ -68,4 +48,4 @@ include_once 'lib/shortcodes.php';
 include_once 'lib/helper.php';
 include_once 'lib/plugin.php';
 
-new Even\Plugin();
+new WPB\Plugin();
