@@ -43,7 +43,6 @@ include_once 'lib/post-types/page.php';
 // include_once 'lib/post-types/example.php';
 
 // misc
-include_once 'lib/menu.php';
 include_once 'lib/shortcodes.php';
 include_once 'lib/helper.php';
 include_once 'lib/plugin.php';
