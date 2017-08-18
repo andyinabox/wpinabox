@@ -1,20 +1,25 @@
 <?php
 
 /**
- * Includes
+ * Make sure Timber library is installed
  */
-$function_includes = [
-  'lib/acf.php',
-  'lib/timber.php',
-  'lib/admin.php',
-  'lib/post-types/page.php'
-];
-foreach ($function_includes as $file) {
-  if (!$filepath = locate_template($file)) {
-    trigger_error(sprintf(__('Error locating %s for inclusion', 'wpb'), $file), E_USER_ERROR);
-  }
-  require_once $filepath;
+if ( ! class_exists( 'Timber' ) ) {
+	add_action( 'admin_notices', function() {
+		echo '<div class="error"><p>Timber not activated. Make sure you activate the plugin in <a href="' . esc_url( admin_url( 'plugins.php#timber' ) ) . '">' . esc_url( admin_url( 'plugins.php') ) . '</a></p></div>';
+	});
+	
+	add_filter('template_include', function($template) {
+		return get_stylesheet_directory() . '/assets/no-timber.html';
+	});
+	
+	return;
 }
-unset($file, $filepath)
+
+
+// set template directory
+Timber::$dirname = array('tpl');
+
+// includes
+require_once 'lib/site.php';
 
 ?>
