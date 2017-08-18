@@ -61,7 +61,7 @@ echo "renaming theme to $theme_name"
 mv wp-content/themes/wpinabox-theme "wp-content/themes/$theme_name"
 
 echo "renaming plugin to $plugin_name"
-mv wp-content/plugins/wpinabox-plugin "wp-content/themes/$plugin_name"
+mv wp-content/plugins/wpinabox-plugin "wp-content/plugins/$plugin_name"
 
 
 echo "replacing names..."
