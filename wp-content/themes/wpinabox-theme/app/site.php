@@ -5,10 +5,12 @@ use Timber\Site as TimberSite;
 
 class Site extends TimberSite {
 	var $pkg;
+	var $env;
 
 	function __construct() {
 		// load the package.json file
 		$this->pkg = json_decode(file_get_contents(get_template_directory() . '/package.json'));
+		$this->env = getenv('WP_ENV') ? getenv('WP_ENV') : 'production';
 
 		// timber setup
 		add_filter( 'timber_context', array( $this, 'add_to_context' ) );
@@ -33,10 +35,13 @@ class Site extends TimberSite {
 		if(!is_admin()) {
 
 			// register styles
-			wp_register_style('wpinabox/css', get_stylesheet_directory_uri() . '/assets/dist/main.css', array('fonts.com'), $this->pkg->version);
+			wp_register_style('wpinabox/css', $this->assets_root() . '/assets/dist/main.css', array(), $this->pkg->version);
+
+			// modernizr build
+			wp_register_script('wpinabox/modernizr', $this->assets_root() . '/assets/dist/modernizr-bundle.js',  array(), $this->pkg->version, true);
 
 			// register scripts
-			wp_register_script('wpinabox/js', get_stylesheet_directory_uri() . '/assets/dist/main.js',  array(), $this->pkg->version, true);
+			wp_register_script('wpinabox/js', $this->assets_root() . '/assets/dist/main.js',  array('wpinabox/modernizr'), $this->pkg->version, true);
 
 			// enqueue styles/scripts
 			wp_enqueue_style('wpinabox/css');			
@@ -47,6 +52,13 @@ class Site extends TimberSite {
 		}
 	}
 
+	function assets_root() {
+		$path = get_template_directory_uri();
+		if($this->env == 'development') {
+			$path = "http://localhost:9001" . wp_make_link_relative($path);
+		}
+		return $path;		
+	}
 
 	function register_image_sizes() {
 		// set up image sizes
@@ -54,6 +66,7 @@ class Site extends TimberSite {
 
 	function add_to_context( $context ) {
 		// set up context
+		$context['options'] = get_fields('options');
 		return $context;
 	}
 	function add_to_twig( $twig ) {
