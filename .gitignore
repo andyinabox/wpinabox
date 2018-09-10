@@ -20,6 +20,7 @@ wp-content/cache/supercache/*
 wp-content/debug.log
 wp-content/*.sql.gz
 wp-content/plugins/wp-site-migrate
+wp-content/plugins/*
 
 # wpengine specific
 .smushit-status

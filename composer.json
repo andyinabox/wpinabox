@@ -34,7 +34,10 @@
 		},
     "require": {
         "wpackagist-plugin/timber-library": "^1.2",
-        "advanced-custom-fields/advanced-custom-fields-pro": "*"
+        "advanced-custom-fields/advanced-custom-fields-pro": "*",
+        "symfony/dotenv": "^3.4",
+        "wpackagist-plugin/wonderm00ns-simple-facebook-open-graph-tags": "2.2.4.2",
+        "wpackagist-plugin/google-sitemap-generator": "^4.0"
     },
     "require-dev": {
     }
