@@ -1,21 +1,7 @@
 // vendor libraries
 @import "../../../node_modules/css-reset-and-normalize-sass/scss/flavored-reset-and-normalize.scss";
 
-/**
- * variables
- */
-
-// @wp-my-var: 500px
-
-// sass mixins
+@import "variables";
 @import "mixins";
-
-// base element styles
 @import "base";
-
-// general layout, containers, etc
 @import "layout";
-
-// css modules
-@import "modules";
-

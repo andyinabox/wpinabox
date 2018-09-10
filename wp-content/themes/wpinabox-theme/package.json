@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.php",
   "scripts": {
-    "build": "gulp",
-    "start": "gulp dev"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "deploy": "# npm run build && vagrant ssh -c 'cd /srv/www/wpinabox/; wordmove push -tdp -e dev'"
   },
   "author": "Andy Dayton <amdayton@gmail.com> (http://andydayton.com/)",
   "devDependencies": {
