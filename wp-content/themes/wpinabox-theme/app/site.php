@@ -55,7 +55,8 @@ class Site extends TimberSite {
 	function assets_root() {
 		$path = get_template_directory_uri();
 		if($this->env == 'development') {
-			$path = "http://localhost:9001" . wp_make_link_relative($path);
+			$port = getenv('DEV_SERVER_PORT') ? getenv('DEV_SERVER_PORT') : '9000';
+			$path = "http://localhost:$port" . wp_make_link_relative($path);
 		}
 		return $path;		
 	}

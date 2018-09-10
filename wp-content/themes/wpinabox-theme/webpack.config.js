@@ -2,20 +2,27 @@ const path = require('path');
 const webpack = require('webpack');
 const pkg = require('./package.json');
 
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+require('dotenv').config({
+  path: path.join(__dirname, '../../../.env')
+});
+
+const SERVER_PORT = process.env.DEV_SERVER_PORT || 9000;
+const NODE_ENV = process.env.NODE_ENV || 'production';
+const isDev = NODE_ENV === 'development';
+const assetsPath = '/wp-content/themes/wpinabox-theme/assets/dist/';
 
 const config = {
+  mode: NODE_ENV,
   devServer: {
     hot: true,
     compress: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
     historyApiFallback: true,
     port: 9001,
-    // noInfo: true,
-    // ignorePath: false,
-    publicPath: 'http://localhost:9001/wp-content/themes/wpinabox-theme/assets/dist/',
+    publicPath: 'http://localhost:' + SERVER_PORT + assetsPath,
     proxy: {
       '**/': {
         target: 'http://wpinabox.test/',
@@ -25,7 +32,7 @@ const config = {
       }
     }
   },
-  entry: './assets/src/js/main.js',
+  entry: ['@babel/polyfill', './assets/src/js/main.js'],
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'assets/dist/'),
@@ -33,51 +40,50 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
+        test: /modernizr\.config\.js$/,
+        loader: "modernizr"
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            { loader: 'css-loader', options: { sourceMap: true } },
-            { loader: 'postcss-loader', options: { sourceMap: true } },
-            { loader: 'sass-loader', options: { sourceMap: true } }
-          ]
-        })
+        use: [
+          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader'
+        ]
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: [
           'file-loader'
         ]
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
       }
     ]
+  },
+  resolve: {
+    alias: {
+      modernizr: path.resolve(__dirname, "modernizr.config.js")
+    }
   },
   performance: {
     hints: false
   },
   devtool: 'eval',
   plugins: [
-    new ExtractTextPlugin('main.css'),
     new CleanWebpackPlugin('assets/dist/'),
-    // https://github.com/Modernizr/Modernizr/blob/master/lib/config-all.json
-    new ModernizrWebpackPlugin(require('./modernizr.config.js'))
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    })
   ]
 };
 
-
-if (process.env.NODE_ENV === 'production') {
-
-  config.plugins.push(new webpack.optimize.UglifyJsPlugin({
-    sourceMap: true,
-    compress: {
-      warnings: false
-    }
-  }));
-
-}
 
 module.exports = config;
