@@ -6,6 +6,7 @@
 *.swp
 Thumbs.db
 .env
+composer.lock
 
 # wordpress specific
 wp-config.php
@@ -21,6 +22,7 @@ wp-content/debug.log
 wp-content/*.sql.gz
 wp-content/plugins/wp-site-migrate
 wp-content/plugins/*
+!wp-content/plugins/*-plugin
 
 # wpengine specific
 .smushit-status
