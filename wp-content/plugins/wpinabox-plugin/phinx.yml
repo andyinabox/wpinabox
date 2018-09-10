@@ -9,7 +9,7 @@ environments:
     production:
         adapter: mysql
         host: localhost
-        name: evenmagazine
+        name: wpinabox
         user: wp
         pass: wp
         port: 3306
@@ -18,7 +18,7 @@ environments:
     development:
         adapter: mysql
         host: localhost
-        name: stevenmagazine
+        name: wpinabox-dev
         user: wp
         pass: wp
         port: 3306
@@ -27,7 +27,7 @@ environments:
     testing:
         adapter: mysql
         host: localhost
-        name: even_test
+        name: wpinabox-test
         user: wp
         pass: wp
         port: 3306

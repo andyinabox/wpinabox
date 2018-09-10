@@ -1,12 +1,9 @@
 
 {
-  "name": "evn-plugin",
-  "version": "0.1.0",
-  "main": "Gruntfile.js",
-  "author": "YOUR NAME HERE",
+  "name": "wpinabox-plugin",
+  "version": "0.2.0",
+  "main": "wpinabox-plugin.pgp",
+  "author": "Andy Dayton <amdayton@gmail.com>",
   "devDependencies": {
-    "grunt": "~0.4.5",
-    "grunt-wp-i18n": "~0.5.0",
-    "grunt-wp-readme-to-markdown": "~1.0.0"
   }
 }
