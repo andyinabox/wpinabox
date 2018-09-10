@@ -5,11 +5,13 @@ use Timber\Site as TimberSite;
 
 class Site extends TimberSite {
 	var $pkg;
+	var $assets_manifest;
 	var $env;
 
 	function __construct() {
 		// load the package.json file
 		$this->pkg = json_decode(file_get_contents(get_template_directory() . '/package.json'));
+		$this->assets_manifest = json_decode(file_get_contents(get_template_directory() . '/assets/dist/manifest.json'));
 		$this->env = getenv('WP_ENV') ? getenv('WP_ENV') : 'production';
 
 		// timber setup
@@ -35,13 +37,10 @@ class Site extends TimberSite {
 		if(!is_admin()) {
 
 			// register styles
-			wp_register_style('wpinabox/css', $this->assets_root() . '/assets/dist/main.css', array(), $this->pkg->version);
-
-			// modernizr build
-			wp_register_script('wpinabox/modernizr', $this->assets_root() . '/assets/dist/modernizr-bundle.js',  array(), $this->pkg->version, true);
+			wp_register_style('wpinabox/css', $this->assets('main.css'), array());
 
 			// register scripts
-			wp_register_script('wpinabox/js', $this->assets_root() . '/assets/dist/main.js',  array('wpinabox/modernizr'), $this->pkg->version, true);
+			wp_register_script('wpinabox/js', $this->assets('main.js'),  array(), null, true);
 
 			// enqueue styles/scripts
 			wp_enqueue_style('wpinabox/css');			
@@ -52,14 +51,19 @@ class Site extends TimberSite {
 		}
 	}
 
-	function assets_root() {
-		$path = get_template_directory_uri();
-		if($this->env == 'development') {
-			$port = getenv('DEV_SERVER_PORT') ? getenv('DEV_SERVER_PORT') : '9000';
-			$path = "http://localhost:$port" . wp_make_link_relative($path);
-		}
-		return $path;		
+	// function assets_root() {
+	// 	$path = get_template_directory_uri();
+	// 	if($this->env == 'development') {
+	// 		$port = getenv('DEV_SERVER_PORT') ? getenv('DEV_SERVER_PORT') : '9000';
+	// 		$path = "http://localhost:$port" . wp_make_link_relative($path);
+	// 	}
+	// 	return $path;		
+	// }
+
+	function assets($key) {
+			return get_stylesheet_directory_uri() . '/assets/dist/' . $this->assets_manifest->{$key};
 	}
+
 
 	function register_image_sizes() {
 		// set up image sizes

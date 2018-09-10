@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.php",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "dev": "cross-env webpack --config build/webpack.config.js --progress --hide-modules --mode development",
+    "prod": "cross-env NODE_ENV=production webpack --config build/webpack.config.js --progress --hide-modules --mode production",
+    "start": "npm run dev -- --watch",
+    "build": "npm run prod",
     "deploy": "# npm run build && vagrant ssh -c 'cd /srv/www/wpinabox/; wordmove push -tdp -e dev'"
   },
   "author": "Andy Dayton <amdayton@gmail.com> (http://andydayton.com/)",
@@ -14,17 +16,18 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
-    "browser-sync": "^2.23.1",
+    "browser-sync-webpack-plugin": "^2.2.2",
     "clean-webpack-plugin": "^0.1.17",
     "cross-env": "^5.1.3",
     "css-hot-loader": "^1.3.5",
     "css-loader": "^0.28.7",
-    "image-webpack-loader": "^4.3.1",
+    "dotenv": "^6.0.0",
     "file-loader": "^1.1.5",
+    "image-webpack-loader": "^4.3.1",
+    "mini-css-extract-plugin": "^0.4.1",
     "modernizr": "^3.6.0",
     "modernizr-loader": "^1.0.1",
     "node-sass": "^4.5.3",
-    "mini-css-extract-plugin": "^0.4.1",
     "postcss-loader": "^2.0.10",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
@@ -32,8 +35,8 @@
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5",
-    "dotenv": "^6.0.0"
-    
+    "browser-sync": "^2.24.7",
+    "webpack-manifest-plugin": "^2.0.3"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0-rc.4",

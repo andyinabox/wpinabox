@@ -14,10 +14,10 @@
  * @package         WPB
  */
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once ABSPATH . '/vendor/autoload.php';
 
 // Init Dotenv
-$dotenv = new Dotenv\Dotenv(__DIR__ . '/../../../');
+$dotenv = new Dotenv\Dotenv(ABSPATH);
 $dotenv->load();
 
 $timber_path = plugin_dir_path( __FILE__ ).'../timber-library/timber.php';
