@@ -10,8 +10,6 @@ Stack
 * [Wordmove](https://github.com/welaika/wordmove) for deployment
 * [symfony/dotenv](https://github.com/symfony/dotenv) to manage environment variables
 
-I'm using [composer](https://getcomposer.org/) to install PHP dependencies, but I usually include plugins, etc. in the repo just to be safe.
-
 ### Themes
 
 * [**Site Theme**](wp-content/themes/wpinabox-theme/) (click through to see theme setup info)
