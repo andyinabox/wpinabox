@@ -1,4 +1,4 @@
-WPinabox Project
+WPinabox Project Template
 ==========================
 
 Developed by Andy Dayton.
@@ -12,7 +12,7 @@ See the instructions for [wpinabox-stack](https://github.com/andyinabox/wpinabox
 Stack
 ------------
 
-* [Composer](https://getcomposer.org/ for dependency management (including WordPress plugins if desired)
+* [Composer](https://getcomposer.org/) for dependency management (including WordPress plugins if desired)
 * [Wordmove](https://github.com/welaika/wordmove) for deployment
 * [symfony/dotenv](https://github.com/symfony/dotenv) to manage environment variables
 
