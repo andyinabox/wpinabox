@@ -63,7 +63,7 @@ class Site extends TimberSite {
 	}
 
 	function assets($key) {
-		$path = get_stylesheet_directory_uri() . '/assets/dist/'
+		$path = get_stylesheet_directory_uri() . '/assets/dist/';
 		if(isset($this->assets_manifest->{$key})) {
 			$path .= $this->assets_manifest->{$key};
 		}
