@@ -56,12 +56,18 @@ if [ "$(whoami)" != "vagrant" ]; then
 
     # run install scripts on the vagrant box
     vagrant ssh -c "cd /srv/www/${project_dir_name}/public_html; ./init.sh"
+    source .env
 
     echo "installing frontend dependencies and building"
-    pushd "wp-content/themes/*-theme"
+    pushd "wp-content/themes/${WPB_PROJ_NAME_LOWER}-theme"
         yarn install
         yarn build
     popd
+
+    echo "deleting the init script"
+    rm init.sh
+
+    echo "done!"
     
 else
 
@@ -110,6 +116,10 @@ else
 
     echo "updating .env"
     sed -i "s/wpinabox/$proj_name_lower/g" .env;
+    echo "WPB_PROJ_NAME_LOWER=$proj_name_lower" >> .env
+    echo "WPB_PROJ_NAME=$proj_name" >> .env
+    echo "WPB_PROJ_NS_LOWER=$proj_ns_lower" >> .env
+    echo "WPB_PROJ_NS_UPPER=$proj_ns_upper" >> .env
 
     echo "installing composer dependencies..."
     composer install
@@ -120,10 +130,4 @@ else
     wp plugin activate timber-library
     wp plugin activate "$plugin_name"
     wp theme activate "$theme_name"
-
-
-    echo "deleting the init script"
-    rm init.sh
-
-    echo "done!"
 fi
