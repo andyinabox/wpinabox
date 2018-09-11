@@ -1,9 +1,10 @@
 WPinabox Project Template
 ==========================
 
+This is a project template for WordPress sites. It includes a [theme template](wp-content/themes/wpinabox-theme/) and [plugin template](wp-content/plugins/wpinabox-plugin/) for the project to get you started, with an aim to decouple site architecture from the theme by including it in a plugin. It leans heavily on [Timber](https://github.com/timber/timber), and assumes you'll probably use [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/).
+
 ![wpinabox](wp-content/themes/wpinabox-theme/screenshot.png)
 
-This is a project template for WordPress sites. It includes a [theme template](wp-content/themes/wpinabox-theme/) and [plugin template](wp-content/plugins/wpinabox-plugin/) for the project to get you started, with an aim to decouple site architecture from the theme by including it in a plugin. It leans heavily on [Timber](https://github.com/timber/timber), and assumes you'll probably use [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/).
 
 Stack
 ------------
