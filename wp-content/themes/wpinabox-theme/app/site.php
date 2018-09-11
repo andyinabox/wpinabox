@@ -9,8 +9,8 @@ class Site extends TimberSite {
 
 	function __construct() {
 		// load the package.json file
-		$this->assets_manifest = json_decode(file_get_contents(get_template_directory() . '/assets/dist/manifest.json'));
-		$this->env = getenv('WPB_ENV') ? getenv('WPB_ENV') : 'production';
+		$this->load_env_variables();
+		$this->load_assets_manifest();
 
 		// timber setup
 		add_filter( 'timber_context', array( $this, 'add_to_context' ) );
@@ -49,9 +49,25 @@ class Site extends TimberSite {
 		}
 	}
 
+	function load_assets_manifest() {
+		$path = get_template_directory() . '/assets/dist/manifest.json';
+		if(file_exists($path)) {
+			$this->assets_manifest = json_decode(file_get_contents(get_template_directory() . '/assets/dist/manifest.json'));
+		} else {
+			$this->assets_manifest = (object) null;
+		}
+	}
+
+	function load_env_variables() {
+		$this->env = getenv('WPB_ENV') ? getenv('WPB_ENV') : 'production';
+	}
 
 	function assets($key) {
-			return get_stylesheet_directory_uri() . '/assets/dist/' . $this->assets_manifest->{$key};
+		$path = get_stylesheet_directory_uri() . '/assets/dist/'
+		if(isset($this->assets_manifest->{$key})) {
+			$path .= $this->assets_manifest->{$key};
+		}
+		return $path;
 	}
 
 	function register_image_sizes() {

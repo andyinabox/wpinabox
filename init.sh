@@ -45,10 +45,24 @@ ask() {
 
 
 if [ "$(whoami)" != "vagrant" ]; then
-#    echo "This script must be run as vagrant user. vagrant ssh and try again." 1>&2
-#    exit 1
-    read -p "What's the name of your VVV project directory? " pname
-   vagrant ssh -c "WPB_PROJ_NAME=${pname}; cd /srv/www/${pname}/public_html; ./init.sh"
+
+    # get project dir name
+    pushd ../
+    project_dir_name="$(basename $PWD)"
+    popd
+
+    # we want to do a clean frontend install once everything is done
+    rm -rf wp-content/themes/wpinabox-theme/node_modules
+
+    # run install scripts on the vagrant box
+    vagrant ssh -c "cd /srv/www/${project_dir_name}/public_html; ./init.sh"
+
+    echo "installing frontend dependencies and building"
+    pushd "wp-content/themes/*-theme"
+        yarn install
+        yarn build
+    popd
+    
 else
 
     read -p "Enter file-friendly project name (my-project-name): " proj_name_lower
@@ -60,10 +74,13 @@ else
     plugin_name="$proj_name_lower-plugin"
     theme_path="wp-content/themes/$theme_name"
     plugin_path="wp-content/plugins/$plugin_name"
-    replace_path="wp-content/**/${proj_name_lower}-*"
+
     echo "removing xtra plugins"
-    rm wp-content/plugins/hekko.php
+    rm wp-content/plugins/hello.php
     rm -r wp-content/plugins/akismet
+
+    echo "removing xtra themes"
+    rm -r wp-content/themes/twenty*
 
     echo "renaming theme to $theme_name"
     mv wp-content/themes/wpinabox-theme $theme_path
@@ -76,20 +93,20 @@ else
     echo "replacing names... this may take a while..."
 
     echo "WPinabox -> ${proj_name}"
-    find $replace_path -type f -readable -writable -exec sed -i "s/WPinabox/$proj_name/g" {} \;
-    # find $plugin_path -type f -readable -writable -exec sed -i "s/WPinabox/$proj_name/g" {} \;
+    find $theme_path -type f -readable -writable -exec sed -i "s/WPinabox/$proj_name/g" {} \;
+    find $plugin_path -type f -readable -writable -exec sed -i "s/WPinabox/$proj_name/g" {} \;
 
     echo "wpb -> ${proj_ns_lower}"
-    find $replace_path -type f -readable -writable -exec sed -i "s/wpb/$proj_ns_lower/g" {} \;
-    # find $plugin_path -type f -readable -writable -exec sed -i "s/wpb/$proj_ns_lower/g" {} \;
+    find $theme_path -type f -readable -writable -exec sed -i "s/wpb/$proj_ns_lower/g" {} \;
+    find $plugin_path -type f -readable -writable -exec sed -i "s/wpb/$proj_ns_lower/g" {} \;
 
     echo "WPB -> ${proj_ns_upper}"
-    find $replace_path -type f -readable -writable -exec sed -i "s/WPB/$proj_ns_upper/g" {} \;
-    # find $plugin_path -type f -readable -writable -exec sed -i "s/WPB/$proj_ns_upper/g" {} \;
+    find $theme_path -type f -readable -writable -exec sed -i "s/WPB/$proj_ns_upper/g" {} \;
+    find $plugin_path -type f -readable -writable -exec sed -i "s/WPB/$proj_ns_upper/g" {} \;
 
     echo "wpinabox -> ${proj_name_lower}"
-    find $replace_path -type f -readable -writable -exec sed -i "s/wpinabox/$proj_name_lower/g" {} \;
-    # find $plugin_path -type f -readable -writable -exec sed -i "s/wpinabox/$proj_name_lower/g" {} \;
+    find $theme_path -type f -readable -writable -exec sed -i "s/wpinabox/$proj_name_lower/g" {} \;
+    find $plugin_path -type f -readable -writable -exec sed -i "s/wpinabox/$proj_name_lower/g" {} \;
 
     echo "updating .env"
     sed -i "s/wpinabox/$proj_name_lower/g" .env;
@@ -103,6 +120,7 @@ else
     wp plugin activate timber-library
     wp plugin activate "$plugin_name"
     wp theme activate "$theme_name"
+
 
     echo "deleting the init script"
     rm init.sh
