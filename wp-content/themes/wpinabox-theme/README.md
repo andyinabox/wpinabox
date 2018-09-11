@@ -4,7 +4,8 @@ WPinabox Theme
 Configuration
 --------------
 
-You'll want to update `build/config.js` to set up your dev server correctly.
+ * You'll want to update `build/config.js` to set up your dev server correctly.
+ * Update the `deploy` script in `package.json` to point to the correct server if you're planning to use [Wordmove](https://github.com/welaika/wordmove).
 
 Development
 ------------
