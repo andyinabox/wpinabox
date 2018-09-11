@@ -2,7 +2,7 @@
 {
   "name": "wpinabox-plugin",
   "version": "0.2.0",
-  "main": "wpinabox-plugin.pgp",
+  "main": "wpinabox-plugin.php",
   "author": "Andy Dayton <amdayton@gmail.com>",
   "devDependencies": {
   }

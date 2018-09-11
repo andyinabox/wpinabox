@@ -1,7 +1,8 @@
 {
     "name": "andyinabox/wpinabox",
     "type": "project",
-    "minimum-stability": "stable",
+		"minimum-stability": "stable",
+		"version": "0.2.0",
     "repositories": [
 	    {
 	      "type": "composer",
