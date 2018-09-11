@@ -69,7 +69,7 @@ else
     mv wp-content/plugins/wpinabox-plugin "wp-content/plugins/$plugin_name"
 
     echo "creating .env file"
-    cp .env-example .env
+    cp .env.example .env
 
     echo "replacing names..."
     find $replace_path -type f -readable -writable -exec sed -i "s/WPinabox/$proj_name/g" {} \;

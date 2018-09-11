@@ -1,7 +1,7 @@
-// load env variables
-require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
-
 const path = require('path');
+// load env variables
+require('dotenv').config({ path: path.join(__dirname, '../../../../.env') });
+
 const webpack = require('webpack');
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -121,7 +121,7 @@ module.exports = {
     new BrowserSyncPlugin({
       host: 'localhost',
       port: devPort,
-      proxy: devUrl, // YOUR DEV-SERVER URL
+      proxy: devUrl,
       files: ['./*.php', './views/**/*.twig'],
     })
   ]
