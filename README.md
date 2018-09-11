@@ -22,6 +22,6 @@ I'm using [composer](https://getcomposer.org/) to install PHP dependencies, but 
 
 ### Plugins
 
-* [**Site Plugin**](wp-content/themes/wpinabox-plugin/)
+* [**Site Plugin**](wp-content/plugins/wpinabox-plugin/)
 * [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/)
 * [Timber](https://github.com/timber/timber) for templating
