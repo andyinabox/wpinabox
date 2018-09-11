@@ -12,6 +12,7 @@ Stack
 * [Composer](https://getcomposer.org/) for dependency management (including WordPress plugins if desired)
 * [Wordmove](https://github.com/welaika/wordmove) for deployment
 * [symfony/dotenv](https://github.com/symfony/dotenv) to manage environment variables
+* [Timber](https://github.com/timber/timber) for templating
 
 ### Themes
 
@@ -20,7 +21,7 @@ Stack
 ### Plugins
 
 * [**Site Plugin**](wp-content/plugins/wpinabox-plugin/)
-* [Timber](https://github.com/timber/timber) for templating
+* [Timber Library](https://wordpress.org/plugins/timber-library/)
 * [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/)
 
 Also, these are optional but come installed:
