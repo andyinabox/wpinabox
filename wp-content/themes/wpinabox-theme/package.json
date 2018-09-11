@@ -1,6 +1,6 @@
 {
   "name": "wpinabox",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "",
   "main": "index.php",
   "scripts": {
@@ -8,7 +8,7 @@
     "prod": "cross-env NODE_ENV=production webpack --config build/webpack.config.js --progress --hide-modules --mode production",
     "start": "npm run dev -- --watch",
     "build": "npm run prod",
-    "deploy": "npm run build && vagrant ssh -c 'cd /srv/www/$WPB_PROJECT_NAME/; wordmove push -tdp -e dev'"
+    "deploy": "npm run build && vagrant ssh -c 'cd /srv/www/$WPB_PROJ_NAME_LOWER/; wordmove push -tdp -e dev'"
   },
   "author": "Andy Dayton <amdayton@gmail.com> (http://andydayton.com/)",
   "devDependencies": {
