@@ -42,43 +42,59 @@ ask() {
     done
 }
 
-read -p "Enter file-friendly project name (my-project-name): " proj_name_lower
 
 
 if [ "$(whoami)" != "vagrant" ]; then
 #    echo "This script must be run as vagrant user. vagrant ssh and try again." 1>&2
 #    exit 1
-   vagrant -c "WPB_PROJ_NAME=$proj_name_lower; cd /srv/www/$proj_name_lower/public_html; ./init.sh"
+    read -p "What's the name of your VVV project directory? " pname
+   vagrant ssh -c "WPB_PROJ_NAME=${pname}; cd /srv/www/${pname}/public_html; ./init.sh"
 else
 
-    proj_name_lower=$WPB_PROJ_NAME
+    read -p "Enter file-friendly project name (my-project-name): " proj_name_lower
     read -p "Enter a replace value for project name (My Project Name): " proj_name
     read -p "Enter a lower-case replace value for namespace (mpn): " proj_ns_lower
     read -p "Enter an upper-case replace value for namespace (MPN): " proj_ns_upper
-    read -p "What's your ACF Pro API key? " acf_pro_key
 
     theme_name="$proj_name_lower-theme"
     plugin_name="$proj_name_lower-plugin"
-    replace_path="./wp-content/"
+    theme_path="wp-content/themes/$theme_name"
+    plugin_path="wp-content/plugins/$plugin_name"
+    replace_path="wp-content/**/${proj_name_lower}-*"
+    echo "removing xtra plugins"
+    rm wp-content/plugins/hekko.php
+    rm -r wp-content/plugins/akismet
 
     echo "renaming theme to $theme_name"
-    mv wp-content/themes/wpinabox-theme "wp-content/themes/$theme_name"
+    mv wp-content/themes/wpinabox-theme $theme_path
 
     echo "renaming plugin to $plugin_name"
     mv wp-content/plugins/wpinabox-plugin/wpinabox-plugin.php "wp-content/plugins/wpinabox-plugin/$plugin_name.php"
-    mv wp-content/plugins/wpinabox-plugin "wp-content/plugins/$plugin_name"
+    mv wp-content/plugins/wpinabox-plugin $plugin_path
 
-    echo "creating .env file"
-    cp .env.example .env
 
-    echo "replacing names..."
+    echo "replacing names... this may take a while..."
+
+    echo "WPinabox -> ${proj_name}"
     find $replace_path -type f -readable -writable -exec sed -i "s/WPinabox/$proj_name/g" {} \;
+    # find $plugin_path -type f -readable -writable -exec sed -i "s/WPinabox/$proj_name/g" {} \;
+
+    echo "wpb -> ${proj_ns_lower}"
     find $replace_path -type f -readable -writable -exec sed -i "s/wpb/$proj_ns_lower/g" {} \;
+    # find $plugin_path -type f -readable -writable -exec sed -i "s/wpb/$proj_ns_lower/g" {} \;
+
+    echo "WPB -> ${proj_ns_upper}"
     find $replace_path -type f -readable -writable -exec sed -i "s/WPB/$proj_ns_upper/g" {} \;
+    # find $plugin_path -type f -readable -writable -exec sed -i "s/WPB/$proj_ns_upper/g" {} \;
+
+    echo "wpinabox -> ${proj_name_lower}"
     find $replace_path -type f -readable -writable -exec sed -i "s/wpinabox/$proj_name_lower/g" {} \;
+    # find $plugin_path -type f -readable -writable -exec sed -i "s/wpinabox/$proj_name_lower/g" {} \;
+
+    echo "updating .env"
+    sed -i "s/wpinabox/$proj_name_lower/g" .env;
 
     echo "installing composer dependencies..."
-    echo "ACF_PRO_KEY=$acf_pro_key" > .env
     composer install
 
     echo "activating theme and plugins..."
