@@ -4,15 +4,13 @@ use Timber;
 use Timber\Site as TimberSite;
 
 class Site extends TimberSite {
-	var $pkg;
 	var $assets_manifest;
 	var $env;
 
 	function __construct() {
 		// load the package.json file
-		$this->pkg = json_decode(file_get_contents(get_template_directory() . '/package.json'));
 		$this->assets_manifest = json_decode(file_get_contents(get_template_directory() . '/assets/dist/manifest.json'));
-		$this->env = getenv('WP_ENV') ? getenv('WP_ENV') : 'production';
+		$this->env = getenv('WPB_ENV') ? getenv('WPB_ENV') : 'production';
 
 		// timber setup
 		add_filter( 'timber_context', array( $this, 'add_to_context' ) );
@@ -51,26 +49,17 @@ class Site extends TimberSite {
 		}
 	}
 
-	// function assets_root() {
-	// 	$path = get_template_directory_uri();
-	// 	if($this->env == 'development') {
-	// 		$port = getenv('DEV_SERVER_PORT') ? getenv('DEV_SERVER_PORT') : '9000';
-	// 		$path = "http://localhost:$port" . wp_make_link_relative($path);
-	// 	}
-	// 	return $path;		
-	// }
 
 	function assets($key) {
 			return get_stylesheet_directory_uri() . '/assets/dist/' . $this->assets_manifest->{$key};
 	}
-
 
 	function register_image_sizes() {
 		// set up image sizes
 	}
 
 	function add_to_context( $context ) {
-		// set up context
+		// include ACF options in the contect
 		$context['options'] = get_fields('options');
 		return $context;
 	}

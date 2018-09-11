@@ -42,52 +42,54 @@ ask() {
     done
 }
 
-if [ "$(whoami)" != "vagrant" ]; then
-   echo "This script must be run as vagrant user. vagrant ssh and try again." 1>&2
-   exit 1
-fi
-
-read -p "Enter a replace value for project name (My Project Name): " proj_name
-read -p "Enter a lower-case replace value for namespace (mpn): " proj_ns_lower
-read -p "Enter an upper-case replace value for namespace (MPN): " proj_ns_upper
 read -p "Enter file-friendly project name (my-project-name): " proj_name_lower
-read -p "What's your ACF Pro API key? " acf_pro_key
-
-theme_name="$proj_name_lower-theme"
-plugin_name="$proj_name_lower-plugin"
-replace_path="./wp-content/"
-
-echo "renaming theme to $theme_name"
-mv wp-content/themes/wpinabox-theme "wp-content/themes/$theme_name"
-
-echo "renaming plugin to $plugin_name"
-mv wp-content/plugins/wpinabox-plugin/wpinabox-plugin.php "wp-content/plugins/wpinabox-plugin/$plugin_name.php"
-mv wp-content/plugins/wpinabox-plugin "wp-content/plugins/$plugin_name"
 
 
-echo "replacing names..."
-find $replace_path -type f -readable -writable -exec sed -i "s/WPinabox/$proj_name/g" {} \;
-find $replace_path -type f -readable -writable -exec sed -i "s/wpb/$proj_ns_lower/g" {} \;
-find $replace_path -type f -readable -writable -exec sed -i "s/WPB/$proj_ns_upper/g" {} \;
-find $replace_path -type f -readable -writable -exec sed -i "s/wpinabox/$proj_name_lower/g" {} \;
+if [ "$(whoami)" != "vagrant" ]; then
+#    echo "This script must be run as vagrant user. vagrant ssh and try again." 1>&2
+#    exit 1
+   vagrant -c "WPB_PROJ_NAME=$proj_name_lower; cd /srv/www/$proj_name_lower/public_html; ./init.sh"
+else
 
-echo "installing composer dependencies..."
-echo "ACF_PRO_KEY=$acf_pro_key" > .env
-composer install
+    proj_name_lower=$WPB_PROJ_NAME
+    read -p "Enter a replace value for project name (My Project Name): " proj_name
+    read -p "Enter a lower-case replace value for namespace (mpn): " proj_ns_lower
+    read -p "Enter an upper-case replace value for namespace (MPN): " proj_ns_upper
+    read -p "What's your ACF Pro API key? " acf_pro_key
 
-echo "activating theme and plugins..."
+    theme_name="$proj_name_lower-theme"
+    plugin_name="$proj_name_lower-plugin"
+    replace_path="./wp-content/"
 
-wp plugin activate advanced-custom-fields-pro
-wp plugin activate timber-library
-wp plugin activate "$plugin_name"
-wp theme activate "$theme_name"
+    echo "renaming theme to $theme_name"
+    mv wp-content/themes/wpinabox-theme "wp-content/themes/$theme_name"
 
+    echo "renaming plugin to $plugin_name"
+    mv wp-content/plugins/wpinabox-plugin/wpinabox-plugin.php "wp-content/plugins/wpinabox-plugin/$plugin_name.php"
+    mv wp-content/plugins/wpinabox-plugin "wp-content/plugins/$plugin_name"
 
-if ask "Remove existing git repository?"; then
-  echo "removing git repository..."
-  rm -rf .git
-else 
-  echo "leaving git repository..."
-  git status
+    echo "creating .env file"
+    cp .env-example .env
+
+    echo "replacing names..."
+    find $replace_path -type f -readable -writable -exec sed -i "s/WPinabox/$proj_name/g" {} \;
+    find $replace_path -type f -readable -writable -exec sed -i "s/wpb/$proj_ns_lower/g" {} \;
+    find $replace_path -type f -readable -writable -exec sed -i "s/WPB/$proj_ns_upper/g" {} \;
+    find $replace_path -type f -readable -writable -exec sed -i "s/wpinabox/$proj_name_lower/g" {} \;
+
+    echo "installing composer dependencies..."
+    echo "ACF_PRO_KEY=$acf_pro_key" > .env
+    composer install
+
+    echo "activating theme and plugins..."
+
+    wp plugin activate advanced-custom-fields-pro
+    wp plugin activate timber-library
+    wp plugin activate "$plugin_name"
+    wp theme activate "$theme_name"
+
+    echo "deleting the init script"
+    rm init.sh
+
+    echo "done!"
 fi
-

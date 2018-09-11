@@ -1,21 +1,17 @@
+// load env variables
+require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
+
 const path = require('path');
 const webpack = require('webpack');
-// const pkg = require('../package.json');
-const config = require('./config');
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
-require('dotenv').config({
-  path: path.join(__dirname, '../../../.env')
-});
-
-// const NODE_ENV = process.env.NODE_ENV || 'production';
-// const isDev = NODE_ENV === 'development';
-// const assetsPath = '/wp-content/themes/wpinabox-theme/assets/dist/';
-// const serverPort = process.env.DEV_SERVER_PORT || 9000;
+const assetsPath = process.env.WPB_THEME_ASSETS_PATH;
+const devPort = process.env.WPB_THEME_DEV_PORT || 9000;
+const devUrl = process.env.WPB_THEME_DEV_URL;
 const inProduction = process.env.NODE_ENV === 'production';
 const styleHash = inProduction ? 'contenthash' : 'hash';
 const scriptHash = inProduction ? 'chunkhash' : 'hash';
@@ -24,7 +20,7 @@ const scriptHash = inProduction ? 'chunkhash' : 'hash';
 const extractCss = {
   loader: MiniCssExtractPlugin.loader,
   options: {
-    publicPath: `${config.assetsPath}`,
+    publicPath: `${assetsPath}`,
   },
 };
 
@@ -41,22 +37,6 @@ const postCssLoader = {
 };
 
 module.exports = {
-  // devServer: {
-  //   hot: true,
-  //   compress: true,
-  //   headers: { 'Access-Control-Allow-Origin': '*' },
-  //   historyApiFallback: true,
-  //   port: 9001,
-  //   publicPath: 'http://localhost:' + SERVER_PORT + assetsPath,
-  //   proxy: {
-  //     '**/': {
-  //       target: 'http://wpinabox.test/',
-  //       secure: false,
-  //       changeOrigin: true,
-  //       autoRewrite: true
-  //     }
-  //   }
-  // },
   entry: ['@babel/polyfill', './assets/src/js/main.js'],
   output: {
     filename: `[name].[${scriptHash}].js`,
@@ -85,7 +65,7 @@ module.exports = {
             options: {
               name: '[name].[ext]',
               outputPath: 'images/',
-              publicPath: `${config.assetsPath}`,
+              publicPath: `${assetsPath}`,
             },
           },
           'image-webpack-loader',
@@ -103,7 +83,7 @@ module.exports = {
           limit: 10000,
           name: '[name].[hash:7].[ext]',
           outputPath: 'fonts/',
-          publicPath: `${config.assetsPath}`,
+          publicPath: `${assetsPath}`,
         },
       }
     ]
@@ -140,8 +120,8 @@ module.exports = {
 
     new BrowserSyncPlugin({
       host: 'localhost',
-      port: config.devPort,
-      proxy: config.devUrl, // YOUR DEV-SERVER URL
+      port: devPort,
+      proxy: devUrl, // YOUR DEV-SERVER URL
       files: ['./*.php', './views/**/*.twig'],
     })
   ]
