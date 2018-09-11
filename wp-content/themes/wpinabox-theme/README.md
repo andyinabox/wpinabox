@@ -1,6 +1,11 @@
 WPinabox Theme
 =======================
 
+Configuration
+--------------
+
+You'll want to update `build/config.js` to set up your dev server correctly.
+
 Development
 ------------
 
@@ -11,6 +16,7 @@ Some notes on the dev setup:
  * [Babel](https://babeljs.io/) for the latest js sugar
  * [Yarn](https://yarnpkg.com/en/) for dependency management
  * [Timber](https://timber.github.io/timber/) and [Twig](http://twig.sensiolabs.org/doc/2.x/templates.html) for templating
+ * [modernizr-loader](https://github.com/peerigon/modernizr-loader) for easily-configurable compatability detection
 
 To install dependencies:
 
@@ -27,7 +33,7 @@ yarn start
 To build all assets:
 
 ```
-yarn run build
+yarn build
 ```
 
 _(If you don't have yarn installed you can substitute `npm` in the above commands and they'll still work)_
