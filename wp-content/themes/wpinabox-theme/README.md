@@ -6,12 +6,11 @@ Development
 
 Some notes on the dev setup:
 
- * [Gulp](http://gulpjs.com/) for development & builds
+ * [Webpack](https://webpack.js.org/) for development & builds
  * [Sass](https://sass-lang.com/) for styles
- * [ECMAScript 2015](https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015) and [browserify](http://browserify.org/) for js
+ * [Babel](https://babeljs.io/) for the latest js sugar
  * [Yarn](https://yarnpkg.com/en/) for dependency management
  * [Timber](https://timber.github.io/timber/) and [Twig](http://twig.sensiolabs.org/doc/2.x/templates.html) for templating
- * [SVGO](https://github.com/svg/svgo) for optimizing svgs
 
 To install dependencies:
 
