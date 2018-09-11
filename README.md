@@ -6,7 +6,9 @@ Developed by Andy Dayton.
 Setup
 ------
 
-See the instructions for [wpinabox-stack](https://github.com/andyinabox/wpinabox-stack) to bootstrap this project on [VVV 2](https://github.com/Varying-Vagrant-Vagrants/VVV).
+1. Clone this repo somewhere.
+2. Run `./init.sh` script from the project root to customize the project and create a new repo.
+3. See the instructions for [wpinabox-stack](https://github.com/andyinabox/wpinabox-stack) to bootstrap this project on [VVV 2](https://github.com/Varying-Vagrant-Vagrants/VVV).
 
 
 Stack
