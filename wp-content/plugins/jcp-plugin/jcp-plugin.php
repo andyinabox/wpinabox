@@ -53,4 +53,4 @@ include_once 'app/shortcodes.php';
 include_once 'app/helper.php';
 include_once 'app/plugin.php';
 
-new WPB\Plugin();
+new JCP\Plugin();

@@ -1,9 +1,0 @@
-
-{
-  "name": "wpinabox-plugin",
-  "version": "0.2.2",
-  "main": "wpinabox-plugin.php",
-  "author": "Andy Dayton <amdayton@gmail.com>",
-  "devDependencies": {
-  }
-}
