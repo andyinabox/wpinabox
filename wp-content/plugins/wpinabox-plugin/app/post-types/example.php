@@ -1,5 +1,5 @@
 <?php
-namespace JCP;
+namespace WPB;
 
 class Example extends BasePost {
   static function register() {

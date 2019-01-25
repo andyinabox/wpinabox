@@ -1,6 +1,6 @@
 <?php
 
-namespace JCP;
+namespace WPB;
 use Timber;
 
 /**

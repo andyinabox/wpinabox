@@ -1,5 +1,5 @@
 <?php
-namespace JCP;
+namespace WPB;
 use Timber;
 
 class Page extends BasePost {

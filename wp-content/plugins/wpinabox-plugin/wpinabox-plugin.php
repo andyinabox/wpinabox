@@ -2,7 +2,7 @@
 // namespace Even;
 
 /**
- * Plugin Name:     JCP Plugin
+ * Plugin Name:     Wpinabox Plugin
  * Plugin URI:      -
  * Description:     Plugin template
  * Author:          Andy Dayton
@@ -11,7 +11,7 @@
  * Domain Path:     /languages
  * Version:         0.2.0
  *
- * @package         JCP
+ * @package         WPB
  */
 
 require_once ABSPATH . '/vendor/autoload.php';
@@ -53,4 +53,4 @@ include_once 'app/shortcodes.php';
 include_once 'app/helper.php';
 include_once 'app/plugin.php';
 
-new JCP\Plugin();
+new WPB\Plugin();
